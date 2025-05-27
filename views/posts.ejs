@@ -1,0 +1,91 @@
+<!-- posts.ejs -->
+<%-include('partials/header.ejs')%>
+
+<div class="container">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-6 fw-bold">
+                <i class="bi bi-file-post me-2"></i>Latest Posts
+            </h1>
+            <p class="text-muted">Discover amazing content from our community</p>
+        </div>
+        <%if(username){%>
+        <a href="/api/v1/posts/form" class="btn btn-gradient btn-lg">
+            <i class="bi bi-plus-circle me-2"></i>Create Post
+        </a>
+        <%}%>
+    </div>
+
+    <!-- Posts Grid -->
+    <% if (posts?.length > 0) { %>
+    <div class="row g-4">
+        <% posts.forEach(post => { %>
+        <div class="col-lg-6 col-md-6">
+            <div class="card h-100 shadow card-hover border-0">
+                <% if (post?.image?.length) { %>
+                <img src="<%- post.image[0].url %>" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Post Image" />
+                <% } else { %>
+                <div class="card-img-top bg-gradient-primary d-flex align-items-center justify-content-center" style="height: 250px;">
+                    <i class="bi bi-file-post display-1 text-white opacity-50"></i>
+                </div>
+                <% } %>
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="bg-primary rounded-circle p-1 me-2" style="width: 30px; height: 30px;">
+                            <i class="bi bi-person-fill text-white small"></i>
+                        </div>
+                        <small class="text-muted">
+                            <strong><%= post.user.username %></strong> • <%= post.createdAt.toDateString() %>
+                        </small>
+                    </div>
+                    <h5 class="card-title fw-bold"><%- post.title %></h5>
+                    <p class="card-text text-muted flex-grow-1">
+                        <%= post.description.length > 120 ? post.description.substring(0, 120) + '...' : post.description %>
+                    </p>
+                    <div class="mt-auto">
+                        <a href="/api/v1/posts/<%=post._id%>" class="btn btn-outline-primary">
+                            <i class="bi bi-arrow-right me-1"></i>Read More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+    
+    <!-- Pagination placeholder -->
+    <nav aria-label="Posts pagination" class="mt-5">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <span class="page-link">Previous</span>
+            </li>
+            <li class="page-item active">
+                <span class="page-link">1</span>
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link">Next</span>
+            </li>
+        </ul>
+    </nav>
+    <% } else { %>
+    <div class="text-center py-5">
+        <div class="mb-4">
+            <i class="bi bi-file-post display-1 text-muted"></i>
+        </div>
+        <h3 class="text-muted mb-3">No Posts Found</h3>
+        <p class="text-muted mb-4">Be the first to share something amazing with the community!</p>
+        <%if(username){%>
+        <a href="/api/v1/posts/form" class="btn btn-gradient btn-lg">
+            <i class="bi bi-plus-circle me-2"></i>Create First Post
+        </a>
+        <%}else{%>
+        <a href="/api/v1/auth/register" class="btn btn-gradient btn-lg">
+            <i class="bi bi-person-plus me-2"></i>Join Us
+        </a>
+        <%}%>
+    </div>
+    <% } %>
+</div>
+
+<%-include('partials/footer.ejs')%>

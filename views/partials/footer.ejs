@@ -1,0 +1,125 @@
+</main>
+    
+<!-- Footer -->
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h5 class="fw-bold mb-3">
+                    <i class="bi bi-chat-dots-fill me-2"></i>BlogApp
+                </h5>
+                <p class="mb-0">Connect, share, and discover amazing content from our vibrant community.</p>
+            </div>
+            <div class="col-lg-6 text-lg-end">
+                <div class="d-flex justify-content-lg-end justify-content-start align-items-center">
+                    <span class="me-3">Follow us:</span>
+                    <a href="#" class="text-white me-3">
+                        <i class="bi bi-facebook fs-5"></i>
+                    </a>
+                    <a href="#" class="text-white me-3">
+                        <i class="bi bi-twitter fs-5"></i>
+                    </a>
+                    <a href="#" class="text-white">
+                        <i class="bi bi-instagram fs-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <hr class="my-3">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <p class="mb-0 small">&copy; 2024 BlogApp. All rights reserved.</p>
+            </div>
+            <div class="col-lg-6 text-lg-end">
+                <a href="#" class="text-white-50 text-decoration-none small me-3">Privacy Policy</a>
+                <a href="#" class="text-white-50 text-decoration-none small me-3">Terms of Service</a>
+                <a href="#" class="text-white-50 text-decoration-none small">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap 5 JavaScript Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script>
+    // Auto-dismiss alerts after 5 seconds
+    setTimeout(function() {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(function(alert) {
+            const bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        });
+    }, 5000);
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // Form validation enhancement
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            const forms = document.getElementsByClassName('needs-validation');
+            Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+    
+    // Image preview for file uploads
+    function handleImagePreview(input, previewContainer) {
+        input.addEventListener('change', function(e) {
+            const files = e.target.files;
+            previewContainer.innerHTML = '';
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const div = document.createElement('div');
+                        div.className = 'col-md-3 mb-2';
+                        div.innerHTML = `
+                            <div class="card">
+                                <img src="${e.target.result}" class="card-img-top" style="height: 100px; object-fit: cover;">
+                                <div class="card-body p-2">
+                                    <small class="text-muted">${file.name}</small>
+                                </div>
+                            </div>
+                        `;
+                        previewContainer.appendChild(div);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+    }
+    
+    // Initialize image preview for forms
+    document.addEventListener('DOMContentLoaded', function() {
+        const imageInputs = document.querySelectorAll('input[type="file"][accept*="image"]');
+        imageInputs.forEach(input => {
+            const previewDiv = document.createElement('div');
+            previewDiv.className = 'row mt-2';
+            previewDiv.id = input.id + '-preview';
+            input.parentNode.appendChild(previewDiv);
+            handleImagePreview(input, previewDiv);
+        });
+    });
+</script>
+</body>
+</html>

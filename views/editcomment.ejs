@@ -1,0 +1,35 @@
+<!-- editcomment.ejs -->
+<%-include('partials/header.ejs')%>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-pencil-square me-2"></i>Edit Comment
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <form action="/api/v1/comments/update/<%= comment._id %>?_method=PUT" method="post">
+                        <div class="mb-4">
+                            <label for="message" class="form-label fw-bold">Comment Message</label>
+                            <textarea class="form-control form-control-lg" name="message" id="message" rows="4" required placeholder="Enter your comment..."><%= comment.message %></textarea>
+                            <div class="form-text">Share your thoughts respectfully</div>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="javascript:history.back()" class="btn btn-outline-secondary me-md-2">
+                                <i class="bi bi-arrow-left me-1"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-gradient btn-lg">
+                                <i class="bi bi-check-circle me-1"></i>Update Comment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%-include('partials/footer.ejs')%>

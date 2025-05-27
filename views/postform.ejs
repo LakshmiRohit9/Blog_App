@@ -1,0 +1,63 @@
+<!-- postform.ejs -->
+<%-include('partials/header.ejs')%>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-plus-circle me-2"></i>Create New Post
+                    </h3>
+                    <p class="mb-0 mt-2">Share your thoughts with the community</p>
+                </div>
+                <div class="card-body p-4">
+                    <%if(success){%>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="bi bi-check-circle me-2"></i><%=success%>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <%}%>
+                    <%if(error){%>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-triangle me-2"></i><%=error%>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <%}%>
+                    
+                    <form action="/api/v1/posts/form" method='POST' enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <label for="title" class="form-label fw-bold">
+                                <i class="bi bi-type me-1"></i>Post Title
+                            </label>
+                            <input type="text" class="form-control form-control-lg" name='title' id="title" placeholder="What's your post about?" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="description" class="form-label fw-bold">
+                                <i class="bi bi-file-text me-1"></i>Description
+                            </label>
+                            <textarea class="form-control" name='description' id="description" rows="8" placeholder="Tell your story..." required></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="image" class="form-label fw-bold">
+                                <i class="bi bi-images me-1"></i>Images (Optional)
+                            </label>
+                            <input multiple type="file" class="form-control" name='images' id="image" accept="image/*">
+                            <div class="form-text">You can upload multiple images to make your post more engaging</div>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="/api/v1/posts" class="btn btn-outline-secondary me-md-2">
+                                <i class="bi bi-arrow-left me-1"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-gradient btn-lg">
+                                <i class="bi bi-send me-1"></i>Publish Post
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%-include('partials/footer.ejs')%>
