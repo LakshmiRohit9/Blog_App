@@ -1,5 +1,6 @@
 require("dotenv").config()
 const express = require("express");
+const serverless = require("serverless-http");
 const userroute = require("./routes/users/Userroute.js");
 const postroute = require("./routes/posts/Postroute.js");
 const commentroute = require("./routes/comments/Commentroute.js");
@@ -40,5 +41,8 @@ app.use('/api/v1/',commentroute)
 
 //Error handler middlewares
 //listen server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, console.log(`Server is running on PORT ${PORT}`));
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, console.log(`Server is running on PORT ${PORT}`));
+
+// Export as serverless function
+module.exports = serverless(app);
