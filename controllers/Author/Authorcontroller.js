@@ -84,7 +84,7 @@ const loginctrl=async (req,res,next)=>{
               maxAge: 3 * 24 * 60 * 60 * 1000,
               httpOnly: true,
             });
-            res.redirect('/users')
+            res.redirect('/users/home')
         }else{
             res.send('invalid credentials')
         }
