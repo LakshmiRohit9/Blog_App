@@ -10,7 +10,7 @@ const isAuthenticated = (req, res, next) => {
     const token = req.cookies ? req.cookies.token : null;
     //redirect
     if (!token) {
-      return res.redirect("/api/v1/users/login");
+      return res.redirect("/users/login");
     }
     //Verify the token
     jwt.verify(token, "anykey", (err, decoded) => {
@@ -41,7 +41,7 @@ const registerctrl = async (req,res)=>{
         }else{
             const hashedpassword = await bcrypt.hash(password,7)
             const user = await User.create({username,email,password:hashedpassword})
-            res.redirect('/api/v1/auth/login')
+            res.redirect('/auth/login')
         }
     } catch (error) {
         res.render("register",{
@@ -84,7 +84,7 @@ const loginctrl=async (req,res,next)=>{
               maxAge: 3 * 24 * 60 * 60 * 1000,
               httpOnly: true,
             });
-            res.redirect('/api/v1/users')
+            res.redirect('/users')
         }else{
             res.send('invalid credentials')
         }
@@ -97,7 +97,7 @@ const loginctrl=async (req,res,next)=>{
 const logoutctrl = async (req,res)=>{
     try {
         res.clearCookie("token")
-        res.redirect('/api/v1/auth/login')
+        res.redirect('/auth/login')
     } catch (error) {
         res.json(error)
     }

@@ -37,7 +37,7 @@ const isAuthenticated = (req, res, next) => {
     const token = req.cookies ? req.cookies.token : null;
     //redirect
     if (!token) {
-        return res.redirect("/api/v1/users/login");
+        return res.redirect("/users/login");
     }
     //Verify the token
     jwt.verify(token, "anykey", (err, decoded) => {
@@ -75,7 +75,6 @@ const createctrl = async (req, res) => {
                 success: "",
                 error: 'Fill all details'
             })
-            // res.redirect(`/api/v1/posts/form?error=Please fill all fields`)
         }
         else {
             const images = await Promise.all(
@@ -221,7 +220,7 @@ const updatectrl = async (req, res) => {
             })
         );
         await post.save()
-        res.redirect(`/api/v1/posts/${post._id}`)
+        res.redirect(`/posts/${post._id}`)
     } catch (error) {
         console.log(error)
     }
@@ -252,7 +251,7 @@ const deletectrl = async (req, res) => {
       
         await Post.findByIdAndDelete(post._id);
         // await Post.findByIdAndDelete(req.params.id);
-        res.redirect("/api/v1/posts")
+        res.redirect("/posts")
     } catch (error) {
         console.log(error)
     }

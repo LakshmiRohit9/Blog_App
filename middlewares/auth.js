@@ -8,7 +8,7 @@ const isAuthenticated = (req, res, next) => {
     const token = req.cookies ? req.cookies.token : null;
     //redirect
     if (!token) {
-      return res.redirect("/api/v1/auth/login");
+      return res.redirect("/auth/login");
     }
     //Verify the token
     jwt.verify(token, "anykey", (err, decoded) => {

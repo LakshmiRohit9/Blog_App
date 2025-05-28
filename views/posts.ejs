@@ -11,7 +11,7 @@
             <p class="text-muted">Discover amazing content from our community</p>
         </div>
         <%if(username){%>
-        <a href="/api/v1/posts/form" class="btn btn-gradient btn-lg">
+        <a href="/posts/form" class="btn btn-gradient btn-lg">
             <i class="bi bi-plus-circle me-2"></i>Create Post
         </a>
         <%}%>
@@ -44,7 +44,7 @@
                         <%= post.description.length > 120 ? post.description.substring(0, 120) + '...' : post.description %>
                     </p>
                     <div class="mt-auto">
-                        <a href="/api/v1/posts/<%=post._id%>" class="btn btn-outline-primary">
+                        <a href="/posts/<%=post._id%>" class="btn btn-outline-primary">
                             <i class="bi bi-arrow-right me-1"></i>Read More
                         </a>
                     </div>
@@ -76,11 +76,11 @@
         <h3 class="text-muted mb-3">No Posts Found</h3>
         <p class="text-muted mb-4">Be the first to share something amazing with the community!</p>
         <%if(username){%>
-        <a href="/api/v1/posts/form" class="btn btn-gradient btn-lg">
+        <a href="/posts/form" class="btn btn-gradient btn-lg">
             <i class="bi bi-plus-circle me-2"></i>Create First Post
         </a>
         <%}else{%>
-        <a href="/api/v1/auth/register" class="btn btn-gradient btn-lg">
+        <a href="/auth/register" class="btn btn-gradient btn-lg">
             <i class="bi bi-person-plus me-2"></i>Join Us
         </a>
         <%}%>

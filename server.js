@@ -27,15 +27,15 @@ app.use(methodOverride("_method"))
 
 //routes
 // USER ROUTES
-app.use('/api/v1/users',userroute)
+app.use('/users',userroute)
 // AUTHOR ROUTES
-app.use("/api/v1/auth", authRoutes);
+app.use("/auth", authRoutes);
 
 // POST ROUTES
-app.use('/api/v1/posts',postroute)
+app.use('/posts',postroute)
 
 // COMMENT ROUTES
-app.use('/api/v1/',commentroute)
+app.use('/',commentroute)
 
 // app.use(errorHandler)
 

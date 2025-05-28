@@ -20,10 +20,6 @@ const UserSchema=new mongoose.Schema({
         public_id : String,
         url : String,
     },
-    coverimage:{
-        type:String,
-        public_id : String,
-    },
     post:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Post",

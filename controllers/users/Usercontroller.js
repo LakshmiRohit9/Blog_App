@@ -15,7 +15,7 @@ const isAuthenticated = (req, res, next) => {
     console.log(token)
     //redirect
     if (!token) {
-      return res.redirect("/api/v1/users/login");
+      return res.redirect("/users/login");
     }
     //Verify the token
     jwt.verify(token, "anykey", (err, decoded) => {
@@ -37,16 +37,6 @@ const homectrl =async (req,res)=>{
     }
 }
 
-
-
-// user details
-const detailctrl = async (req,res)=>{
-    try {
-        res.json({msg:"user details"})
-    } catch (error) {
-        res.json(error)
-    }
-}
 
 const updatepeofileformctrl = async (req, res) => {
     try {
@@ -125,40 +115,12 @@ const profilectrl = async (req,res)=>{
             posts,
             postCount: posts.length,
         });
-        // const username = req.userData ? req.userData.username : null;
-        // res.render('home',{username,title:'home'})
     } catch (error) {
         console.log("error in profile controller")
         res.json(error)
     }
 }
 
-// profile photo
-const pfpctrl = async (req,res)=>{
-    try {
-        res.json({msg:"user pfp"})
-    } catch (error) {
-        res.json(error)
-    }
-}
-
-// cover image
-const coverctrl = async (req,res)=>{
-    try {
-        res.json({msg:"user cover"})
-    } catch (error) {
-        res.json(error)
-    }
-}
-
-// password update
-const pwdupdatectrl = async (req,res)=>{
-    try {
-        res.json({msg:"user password updated"})
-    } catch (error) {
-        res.json(error)
-    }
-}
 
 const deleteprofilectrl = async (req, res) => {
     try {
@@ -189,7 +151,7 @@ const deleteprofilectrl = async (req, res) => {
         //delete user
         await User.findByIdAndDelete(req.userData.id);
         res.clearCookie("token");
-        res.redirect("/api/v1/auth/register");
+        res.redirect("/auth/register");
     } catch (error) {
         console.log("error in delete profile controller")
         res.json(error);
@@ -197,5 +159,5 @@ const deleteprofilectrl = async (req, res) => {
 }
 
 module.exports={
-    isAuthenticated,homectrl,detailctrl,updateprofilectrl,updatepeofileformctrl,profilectrl,pfpctrl,coverctrl,pwdupdatectrl,deleteprofilectrl
+    isAuthenticated,homectrl,updateprofilectrl,updatepeofileformctrl,profilectrl,deleteprofilectrl
 }

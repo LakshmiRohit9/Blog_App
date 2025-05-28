@@ -11,7 +11,7 @@
                     </h3>
                 </div>
                 <div class="card-body p-4">
-                    <form action="/api/v1/comments/update/<%= comment._id %>?_method=PUT" method="post">
+                    <form action="/comments/update/<%= comment._id %>?_method=PUT" method="post">
                         <div class="mb-4">
                             <label for="message" class="form-label fw-bold">Comment Message</label>
                             <textarea class="form-control form-control-lg" name="message" id="message" rows="4" required placeholder="Enter your comment..."><%= comment.message %></textarea>

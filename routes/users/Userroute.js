@@ -7,7 +7,7 @@ const upload = require("../../config/multer")
 
 // home page
 
-userroute.get('/',isAuthenticated, Userctrl.homectrl);
+userroute.get('/home',isAuthenticated, Userctrl.homectrl);
 // profile
 userroute.get('/profile',isAuthenticated, Userctrl.profilectrl);
 // update profile form

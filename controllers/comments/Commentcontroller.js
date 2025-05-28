@@ -28,7 +28,7 @@ const isAuthenticated = (req, res, next) => {
     const token = req.cookies ? req.cookies.token : null;
     //redirect
     if (!token) {
-      return res.redirect("/api/v1/users/login");
+      return res.redirect("/users/login");
     }
     //Verify the token
     jwt.verify(token, "anykey", (err, decoded) => {
@@ -68,7 +68,7 @@ const createctrl = async (req,res)=>{
         user.comment.push(comment._id)
         await post.save()
         await user.save()
-        res.redirect(`/api/v1/posts/${postid}`)
+        res.redirect(`/posts/${postid}`)
     } catch (error) {
         res.json(error)
     }
@@ -108,7 +108,7 @@ const updatectrl = async (req,res)=>{
         const comment = await Comment.findById(req.params.id);
         comment.message = message;
         await comment.save();
-        res.redirect(`/api/v1/posts/${comment.post}`);
+        res.redirect(`/posts/${comment.post}`);
     } catch (error) {
         res.json(error)
     }
@@ -130,7 +130,7 @@ const deletectrl = async (req,res)=>{
         });
         // Delete the comment
         await Comment.findByIdAndDelete(comment._id);
-        res.redirect(`/api/v1/posts`)
+        res.redirect(`//posts`)
     } catch (error) {
         res.json(error)
     }
